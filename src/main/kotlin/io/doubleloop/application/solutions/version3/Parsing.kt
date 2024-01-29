@@ -1,4 +1,4 @@
-package io.doubleloop.application.solutions.version2
+package io.doubleloop.application.solutions.version3
 
 import arrow.core.Either
 import arrow.core.left
@@ -20,7 +20,7 @@ fun runMission(
     val rover = parseRover(inputRover).bind()
     val commands = parseCommands(inputCommands).bind()
     val result = executeAll(planet, rover, commands)
-    render(result)
+    result.fold(::renderObstacle, ::renderComplete)
 }
 
 fun parseCommand(input: Char): Either<ParseError, Command> =
@@ -91,5 +91,9 @@ fun parseTuple(separator: String, input: String): Either<Throwable, Pair<Int, In
         Pair(first, second)
     }
 
-fun render(rover: Rover): String =
+fun renderComplete(rover: Rover): String =
     "${rover.position.x}:${rover.position.y}:${rover.orientation}"
+
+fun renderObstacle(rover: ObstacleDetected): String =
+    "O:${renderComplete(rover)}"
+
