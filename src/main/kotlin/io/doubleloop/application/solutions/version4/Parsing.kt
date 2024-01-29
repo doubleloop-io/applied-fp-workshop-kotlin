@@ -1,11 +1,12 @@
-package io.doubleloop.application.solutions.version3
+package io.doubleloop.application.solutions.version4
 
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.raise.either
 import arrow.core.right
-import io.doubleloop.application.solutions.version3.Orientation.*
-import io.doubleloop.application.solutions.version3.ParseError.*
+import io.doubleloop.application.solutions.version4.Command.*
+import io.doubleloop.application.solutions.version4.Orientation.*
+import io.doubleloop.application.solutions.version4.ParseError.*
 
 sealed class ParseError {
     data class InvalidPlanet(val message: String) : ParseError()
@@ -27,10 +28,10 @@ fun runMission(
 
 fun parseCommand(input: Char): Either<ParseError, Command> =
     when (input.lowercase()) {
-        "f" -> Command.MoveForward.right()
-        "b" -> Command.MoveBackward.right()
-        "r" -> Command.TurnRight.right()
-        "l" -> Command.TurnLeft.right()
+        "f" -> MoveForward.right()
+        "b" -> MoveBackward.right()
+        "r" -> TurnRight.right()
+        "l" -> TurnLeft.right()
         else -> InvalidCommand("invalid command: $input").left()
     }
 
@@ -99,3 +100,9 @@ fun renderComplete(rover: Rover): String =
 fun renderObstacle(rover: ObstacleDetected): String =
     "O:${renderComplete(rover)}"
 
+fun renderError(error: ParseError): String =
+    when (error) {
+        is InvalidPlanet -> "Planet parsing: ${error.message}"
+        is InvalidRover -> "Rover parsing: ${error.message}"
+        is InvalidCommand -> "Command parsing: ${error.message}"
+    }

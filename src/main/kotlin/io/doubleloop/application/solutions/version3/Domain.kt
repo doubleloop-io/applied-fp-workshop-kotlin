@@ -4,6 +4,8 @@ import arrow.core.Either
 import arrow.core.flatMap
 import arrow.core.left
 import arrow.core.right
+import io.doubleloop.application.solutions.version3.Command.*
+import io.doubleloop.application.solutions.version3.Orientation.*
 
 data class Obstacle(val x: Int, val y: Int)
 data class Planet(val size: Size, val obstacles: List<Obstacle>)
@@ -36,29 +38,29 @@ fun executeAll(planet: Planet, rover: Rover, commands: List<Command>): Either<Ob
 
 fun execute(planet: Planet, rover: Rover, command: Command): Either<ObstacleDetected, Rover> =
     when (command) {
-        is Command.TurnRight -> turnRight(rover).right()
-        is Command.TurnLeft -> turnLeft(rover).right()
-        is Command.MoveForward -> moveForward(planet, rover)
-        is Command.MoveBackward -> moveBackward(planet, rover)
+        is TurnRight -> turnRight(rover).right()
+        is TurnLeft -> turnLeft(rover).right()
+        is MoveForward -> moveForward(planet, rover)
+        is MoveBackward -> moveBackward(planet, rover)
     }
 
 fun turnRight(rover: Rover): Rover =
     rover.copy(
         orientation = when (rover.orientation) {
-            is Orientation.N -> Orientation.E
-            is Orientation.E -> Orientation.S
-            is Orientation.S -> Orientation.W
-            is Orientation.W -> Orientation.N
+            is N -> E
+            is E -> S
+            is S -> W
+            is W -> N
         }
     )
 
 fun turnLeft(rover: Rover): Rover =
     rover.copy(
         orientation = when (rover.orientation) {
-            is Orientation.N -> Orientation.W
-            is Orientation.W -> Orientation.S
-            is Orientation.S -> Orientation.E
-            is Orientation.E -> Orientation.N
+            is N -> W
+            is W -> S
+            is S -> E
+            is E -> N
         }
     )
 
@@ -72,18 +74,18 @@ fun moveBackward(planet: Planet, rover: Rover): Either<ObstacleDetected, Rover> 
 
 fun opposite(orientation: Orientation): Orientation =
     when (orientation) {
-        is Orientation.N -> Orientation.S
-        is Orientation.S -> Orientation.N
-        is Orientation.E -> Orientation.W
-        is Orientation.W -> Orientation.E
+        is N -> S
+        is S -> N
+        is E -> W
+        is W -> E
     }
 
 fun delta(orientation: Orientation): Delta =
     when (orientation) {
-        is Orientation.N -> Delta(0, 1)
-        is Orientation.S -> Delta(0, -1)
-        is Orientation.E -> Delta(1, 0)
-        is Orientation.W -> Delta(-1, 0)
+        is N -> Delta(0, 1)
+        is S -> Delta(0, -1)
+        is E -> Delta(1, 0)
+        is W -> Delta(-1, 0)
     }
 
 fun next(planet: Planet, rover: Rover, delta: Delta): Either<ObstacleDetected, Position> {

@@ -1,5 +1,8 @@
 package io.doubleloop.application.solutions.version1
 
+import io.doubleloop.application.solutions.version1.Command.*
+import io.doubleloop.application.solutions.version1.Orientation.*
+
 data class Planet(val size: Size)
 data class Size(val width: Int, val height: Int)
 data class Position(val x: Int, val y: Int)
@@ -25,29 +28,29 @@ fun executeAll(planet: Planet, rover: Rover, commands: List<Command>): Rover =
 
 fun execute(planet: Planet, rover: Rover, command: Command): Rover =
     when (command) {
-        is Command.TurnRight -> turnRight(rover)
-        is Command.TurnLeft -> turnLeft(rover)
-        is Command.MoveForward -> moveForward(planet, rover)
-        is Command.MoveBackward -> moveBackward(planet, rover)
+        is TurnRight -> turnRight(rover)
+        is TurnLeft -> turnLeft(rover)
+        is MoveForward -> moveForward(planet, rover)
+        is MoveBackward -> moveBackward(planet, rover)
     }
 
 fun turnRight(rover: Rover): Rover =
     rover.copy(
         orientation = when (rover.orientation) {
-            is Orientation.N -> Orientation.E
-            is Orientation.E -> Orientation.S
-            is Orientation.S -> Orientation.W
-            is Orientation.W -> Orientation.N
+            is N -> E
+            is E -> S
+            is S -> W
+            is W -> N
         }
     )
 
 fun turnLeft(rover: Rover): Rover =
     rover.copy(
         orientation = when (rover.orientation) {
-            is Orientation.N -> Orientation.W
-            is Orientation.W -> Orientation.S
-            is Orientation.S -> Orientation.E
-            is Orientation.E -> Orientation.N
+            is N -> W
+            is W -> S
+            is S -> E
+            is E -> N
         }
     )
 
@@ -59,18 +62,18 @@ fun moveBackward(planet: Planet, rover: Rover): Rover =
 
 fun opposite(orientation: Orientation): Orientation =
     when (orientation) {
-        is Orientation.N -> Orientation.S
-        is Orientation.S -> Orientation.N
-        is Orientation.E -> Orientation.W
-        is Orientation.W -> Orientation.E
+        is N -> S
+        is S -> N
+        is E -> W
+        is W -> E
     }
 
 fun delta(orientation: Orientation): Delta =
     when (orientation) {
-        is Orientation.N -> Delta(0, 1)
-        is Orientation.S -> Delta(0, -1)
-        is Orientation.E -> Delta(1, 0)
-        is Orientation.W -> Delta(-1, 0)
+        is N -> Delta(0, 1)
+        is S -> Delta(0, -1)
+        is E -> Delta(1, 0)
+        is W -> Delta(-1, 0)
     }
 
 fun next(planet: Planet, rover: Rover, delta: Delta): Position =
