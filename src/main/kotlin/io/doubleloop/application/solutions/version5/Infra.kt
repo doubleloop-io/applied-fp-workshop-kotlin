@@ -1,4 +1,4 @@
-package io.doubleloop.application.solutions.version4
+package io.doubleloop.application.solutions.version5
 
 import arrow.core.Either
 import arrow.core.raise.catch
@@ -10,19 +10,33 @@ import io.doubleloop.application.solutions.utils.File.loadPair
 import kotlin.coroutines.suspendCoroutine
 
 suspend fun createApplication(planetFile: String, roverFile: String): Unit {
-    catch({
-        runMission(planetFile, roverFile)
-            .fold(
-                { writeObstacleDetected(it) },
-                { writeSequenceCompleted(it) }
-            )
-    }) { writeError(it) }
+    val fileMissionSource = FileMissionSource(planetFile, roverFile)
+    val consoleCommandsChannel = ConsoleCommandsChannel()
+    val consoleMissionReport = ConsoleMissionReport()
+    createApplication(fileMissionSource, consoleCommandsChannel, consoleMissionReport)
 }
 
-suspend fun runMission(planetFile: String, roverFile: String): Either<ObstacleDetected, Rover> {
-    val planet = loadPlanet(planetFile)
-    val rover = loadRover(roverFile)
-    val commands = loadCommands()
+suspend fun createApplication(
+    missionSource: MissionSource,
+    commandsChannel: CommandsChannel,
+    missionReport: MissionReport
+): Unit {
+    catch({
+        runMission(missionSource, commandsChannel)
+            .fold(
+                { missionReport.obstacleDetected(it) },
+                { missionReport.sequenceCompleted(it) }
+            )
+    }) { missionReport.error(it) }
+}
+
+suspend fun runMission(
+    missionSource: MissionSource,
+    commandsChannel: CommandsChannel
+): Either<ObstacleDetected, Rover> {
+    val planet = missionSource.readPlanet()
+    val rover = missionSource.readRover()
+    val commands = commandsChannel.receive()
     return executeAll(planet, rover, commands)
 }
 

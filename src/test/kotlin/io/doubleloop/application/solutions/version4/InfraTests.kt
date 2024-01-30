@@ -1,5 +1,6 @@
 package io.doubleloop.application.solutions.version4
 
+import io.doubleloop.application.solutions.utils.Console
 import io.doubleloop.application.solutions.version4.Command.MoveForward
 import io.doubleloop.application.solutions.version4.Command.TurnRight
 import io.doubleloop.application.solutions.version4.Orientation.N
