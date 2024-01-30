@@ -1,4 +1,4 @@
-package io.doubleloop
+package io.doubleloop.application
 
 fun main() {
     println("Hello, world!")
