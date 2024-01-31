@@ -1,10 +1,10 @@
-package io.doubleloop.application.solutions.version3
+package io.doubleloop.solutions.version3
 
 import arrow.core.left
 import arrow.core.right
-import io.doubleloop.application.solutions.version3.Command.*
-import io.doubleloop.application.solutions.version3.Orientation.E
-import io.doubleloop.application.solutions.version3.Orientation.N
+import io.doubleloop.solutions.version3.Command.*
+import io.doubleloop.solutions.version3.Orientation.E
+import io.doubleloop.solutions.version3.Orientation.N
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo

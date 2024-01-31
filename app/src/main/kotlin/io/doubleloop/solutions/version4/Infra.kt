@@ -1,12 +1,12 @@
-package io.doubleloop.application.solutions.version4
+package io.doubleloop.solutions.version4
 
 import arrow.core.Either
 import arrow.core.raise.catch
 import arrow.core.raise.either
-import io.doubleloop.application.solutions.utils.Console.ask
-import io.doubleloop.application.solutions.utils.Console.logError
-import io.doubleloop.application.solutions.utils.Console.logInfo
-import io.doubleloop.application.solutions.utils.File.loadPair
+import io.doubleloop.solutions.utils.Console.ask
+import io.doubleloop.solutions.utils.Console.logError
+import io.doubleloop.solutions.utils.Console.logInfo
+import io.doubleloop.solutions.utils.File.loadPair
 import kotlin.coroutines.suspendCoroutine
 
 suspend fun createApplication(planetFile: String, roverFile: String): Unit {

@@ -1,4 +1,4 @@
-package io.doubleloop.application.solutions.utils
+package io.doubleloop.solutions.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

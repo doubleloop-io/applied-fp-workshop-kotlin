@@ -1,7 +1,7 @@
-package io.doubleloop.application.solutions.version2
+package io.doubleloop.solutions.version2
 
-import io.doubleloop.application.solutions.version2.Command.*
-import io.doubleloop.application.solutions.version2.Orientation.*
+import io.doubleloop.solutions.version2.Command.*
+import io.doubleloop.solutions.version2.Orientation.*
 
 data class Obstacle(val x: Int, val y: Int)
 data class Planet(val size: Size, val obstacles: List<Obstacle>)

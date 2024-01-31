@@ -1,7 +1,7 @@
-package io.doubleloop.application.solutions.version1
+package io.doubleloop.solutions.version1
 
-import io.doubleloop.application.solutions.version1.Command.*
-import io.doubleloop.application.solutions.version1.Orientation.*
+import io.doubleloop.solutions.version1.Command.*
+import io.doubleloop.solutions.version1.Orientation.*
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo

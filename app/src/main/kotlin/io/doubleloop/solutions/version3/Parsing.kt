@@ -1,11 +1,11 @@
-package io.doubleloop.application.solutions.version3
+package io.doubleloop.solutions.version3
 
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.raise.either
 import arrow.core.right
-import io.doubleloop.application.solutions.version3.Orientation.*
-import io.doubleloop.application.solutions.version3.ParseError.*
+import io.doubleloop.solutions.version3.Orientation.*
+import io.doubleloop.solutions.version3.ParseError.*
 
 sealed class ParseError {
     data class InvalidPlanet(val message: String) : ParseError()

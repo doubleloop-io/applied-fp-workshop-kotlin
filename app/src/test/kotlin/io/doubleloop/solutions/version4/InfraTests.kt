@@ -1,9 +1,9 @@
-package io.doubleloop.application.solutions.version4
+package io.doubleloop.solutions.version4
 
-import io.doubleloop.application.solutions.utils.Console
-import io.doubleloop.application.solutions.version4.Command.MoveForward
-import io.doubleloop.application.solutions.version4.Command.TurnRight
-import io.doubleloop.application.solutions.version4.Orientation.N
+import io.doubleloop.solutions.utils.Console
+import io.doubleloop.solutions.version4.Command.MoveForward
+import io.doubleloop.solutions.version4.Command.TurnRight
+import io.doubleloop.solutions.version4.Orientation.N
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat

@@ -1,4 +1,4 @@
-package io.doubleloop.application.solutions.version5
+package io.doubleloop.solutions.version5
 
 interface MissionSource {
     suspend fun readPlanet(): Planet

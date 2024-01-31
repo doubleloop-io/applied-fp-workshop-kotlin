@@ -1,4 +1,4 @@
-package io.doubleloop.application.solutions.version5
+package io.doubleloop.solutions.version5
 
 class FileMissionSource(private val planetFile: String, private val roverFile: String) : MissionSource {
     override suspend fun readPlanet(): Planet =

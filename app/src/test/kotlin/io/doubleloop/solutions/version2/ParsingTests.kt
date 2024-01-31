@@ -1,8 +1,8 @@
-package io.doubleloop.application.solutions.version2
+package io.doubleloop.solutions.version2
 
 import arrow.core.left
 import arrow.core.right
-import io.doubleloop.application.solutions.version2.ParseError.*
+import io.doubleloop.solutions.version2.ParseError.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
