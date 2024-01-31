@@ -3,3 +3,4 @@ plugins {
 }
 rootProject.name = "applied-fp-workshop-kotlin"
 include("app")
+include("demo")
