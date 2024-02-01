@@ -8,6 +8,18 @@ Run build
 $ ./gradlew build
 ```
 
+Run cli application
+
+```sh
+$ ./gradlew app:run
+```
+
+Run web application
+
+```sh
+$ ./gradlew webapp:run
+```
+
 ## Documentation
 
 ### Kotlin

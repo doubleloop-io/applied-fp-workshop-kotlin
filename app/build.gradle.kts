@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.9.22"
+    application
 }
 
 group = "io.doubleloop"
@@ -21,6 +22,10 @@ dependencies {
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.10.1")
+}
+
+application {
+    mainClass.set("io.doubleloop.MainKt")
 }
 
 tasks.test {

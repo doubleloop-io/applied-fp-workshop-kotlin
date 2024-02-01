@@ -1,5 +1,5 @@
 package io.doubleloop
 
 fun main() {
-    println("Hello World!")
+    println("[WEB] Hello World!")
 }
