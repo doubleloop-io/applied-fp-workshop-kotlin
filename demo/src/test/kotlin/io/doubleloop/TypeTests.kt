@@ -5,7 +5,7 @@ import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 import strikt.assertions.isNotEqualTo
 
-class Types {
+class TypeTests {
     // # Types
     // In FP types are used to model/describe data and behavior intent.
     //   - Algebraic Data Type (ADT) to model data
