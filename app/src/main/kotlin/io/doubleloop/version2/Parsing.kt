@@ -101,7 +101,7 @@ fun runMission(
 
 // TODO 12: convert a rover in a string
 // OUTPUT EXAMPLE: Rover(Position(3, 2), N) -> "3:2:S"
-fun render(rover: Rover): String =
+fun renderComplete(rover: Rover): String =
     TODO()
 
 // TODO 13: call `runMission` and render the result

@@ -9,7 +9,7 @@ import io.doubleloop.utils.Console.logInfo
 import io.doubleloop.utils.File.loadPair
 import kotlin.coroutines.suspendCoroutine
 
-suspend fun createApplication(planetFile: String, roverFile: String) {
+suspend fun runApp(planetFile: String, roverFile: String) {
     catch({
         runMission(planetFile, roverFile)
             .fold(

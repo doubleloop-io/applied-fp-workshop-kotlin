@@ -13,16 +13,23 @@ sealed class ParseError {
     data class InvalidCommand(val message: String) : ParseError()
 }
 
+fun runApp(
+    inputPlanet: Pair<String, String>,
+    inputRover: Pair<String, String>,
+    inputCommands: String
+): Either<ParseError, String> =
+    runMission(inputPlanet, inputRover, inputCommands)
+        .map { it.fold(::renderObstacle, ::renderComplete) }
+
 fun runMission(
     inputPlanet: Pair<String, String>,
     inputRover: Pair<String, String>,
     inputCommands: String
-): Either<ParseError, String> = either {
+): Either<ParseError, Either<ObstacleDetected, Rover>> = either {
     val planet = parsePlanet(inputPlanet).bind()
     val rover = parseRover(inputRover).bind()
     val commands = parseCommands(inputCommands).bind()
-    val result = executeAll(planet, rover, commands)
-    result.fold(::renderObstacle, ::renderComplete)
+    executeAll(planet, rover, commands)
 }
 
 fun parseCommand(input: Char): Either<ParseError, Command> =

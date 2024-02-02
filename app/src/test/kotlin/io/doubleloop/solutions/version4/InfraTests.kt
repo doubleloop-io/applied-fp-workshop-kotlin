@@ -40,7 +40,7 @@ class InfraTests {
     @Test
     fun `go to opposite angle`() = runTest {
         val result = runCaptureOutput("RBBLBRF") {
-            createApplication("planet.txt", "rover.txt")
+            runApp("planet.txt", "rover.txt")
         }
         expectThat(result).isEqualTo("${Console.GREEN}[OK] 4:3:E${Console.RESET}")
     }
@@ -48,7 +48,7 @@ class InfraTests {
     @Test
     fun `hit obstacle during commands execution`() = runTest {
         val result = runCaptureOutput("RFF") {
-            createApplication("planet.txt", "rover.txt")
+            runApp("planet.txt", "rover.txt")
         }
         expectThat(result).isEqualTo("${Console.GREEN}[OK] O:1:0:E${Console.RESET}")
     }
@@ -56,7 +56,7 @@ class InfraTests {
     @Test
     fun `invalid planet data`() = runTest {
         val result = runCaptureOutput("RBBLBRF") {
-            createApplication("planet_invalid_data.txt", "rover.txt")
+            runApp("planet_invalid_data.txt", "rover.txt")
         }
         expectThat(result).isEqualTo("${Console.RED}[ERROR] Planet parsing: invalid size: ax4${Console.RESET}")
     }
@@ -64,7 +64,7 @@ class InfraTests {
     @Test
     fun `invalid planet content`() = runTest {
         val result = runCaptureOutput("RBBLBRF") {
-            createApplication("planet_invalid_content.txt", "rover.txt")
+            runApp("planet_invalid_content.txt", "rover.txt")
         }
         expectThat(result).isEqualTo("${Console.RED}[ERROR] Invalid file content: planet_invalid_content.txt${Console.RESET}")
     }

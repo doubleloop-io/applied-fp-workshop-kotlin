@@ -16,7 +16,7 @@ class InfraTests {
     @Test
     fun `go to opposite angle (integration)`() = runTest {
         val result = runCaptureOutput("RBBLBRF") {
-            createApplication("planet.txt", "rover.txt")
+            runApp("planet.txt", "rover.txt")
         }
         expectThat(result).isEqualTo("${Console.GREEN}[OK] 4:3:E${Console.RESET}")
     }
@@ -40,7 +40,7 @@ class InfraTests {
         )
         val missionReport = SpyMissionReport()
 
-        createApplication(missionSource, commandsChannel, missionReport)
+        runApp(missionSource, commandsChannel, missionReport)
 
         expectThat(missionReport.output).isEqualTo("COMPLETED: Rover(position=Position(x=4, y=3), orientation=E)")
     }
@@ -60,7 +60,7 @@ class InfraTests {
         )
         val missionReport = SpyMissionReport()
 
-        createApplication(missionSource, commandsChannel, missionReport)
+        runApp(missionSource, commandsChannel, missionReport)
 
         expectThat(missionReport.output).isEqualTo("OBSTACLE: Rover(position=Position(x=1, y=0), orientation=E)")
     }

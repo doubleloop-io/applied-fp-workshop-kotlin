@@ -9,14 +9,14 @@ import io.doubleloop.utils.Console.logInfo
 import io.doubleloop.utils.File.loadPair
 import kotlin.coroutines.suspendCoroutine
 
-suspend fun createApplication(planetFile: String, roverFile: String) {
+suspend fun runApp(planetFile: String, roverFile: String) {
     val fileMissionSource = FileMissionSource(planetFile, roverFile)
     val consoleCommandsChannel = ConsoleCommandsChannel()
     val consoleMissionReport = ConsoleMissionReport()
-    createApplication(fileMissionSource, consoleCommandsChannel, consoleMissionReport)
+    runApp(fileMissionSource, consoleCommandsChannel, consoleMissionReport)
 }
 
-suspend fun createApplication(
+suspend fun runApp(
     missionSource: MissionSource,
     commandsChannel: CommandsChannel,
     missionReport: MissionReport

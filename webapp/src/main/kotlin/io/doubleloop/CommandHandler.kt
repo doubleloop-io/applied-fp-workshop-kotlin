@@ -8,7 +8,7 @@ class CommandHandler(
     private val commandsChannel: CommandsChannel,
     private val missionReport: MissionReport
 ) {
-    suspend fun runMission() {
+    suspend fun runApp() {
         catch({
             runMission(missionSource, commandsChannel)
                 .fold(

@@ -15,7 +15,7 @@ class ParsingTests {
         val rover = Pair("0,0", "N")
         val commands = "RBBLBRF"
 
-        val result = runMission(planet, rover, commands)
+        val result = runApp(planet, rover, commands)
 
         expectThat(result).isEqualTo("4:3:E".right())
     }
@@ -26,7 +26,7 @@ class ParsingTests {
         val rover = Pair("0,0", "N")
         val commands = "RFF"
 
-        val result = runMission(planet, rover, commands)
+        val result = runApp(planet, rover, commands)
 
         expectThat(result).isEqualTo("O:1:0:E".right())
     }
@@ -37,7 +37,7 @@ class ParsingTests {
         val rover = Pair("1,2", "N")
         val commands = "RBRF"
 
-        val result = runMission(planet, rover, commands)
+        val result = runApp(planet, rover, commands)
 
         expectThat(result).isEqualTo(InvalidPlanet("invalid size: ax4").left())
     }

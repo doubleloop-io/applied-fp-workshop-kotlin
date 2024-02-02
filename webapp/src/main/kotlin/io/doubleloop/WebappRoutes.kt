@@ -26,7 +26,7 @@ object WebappRoutes {
 
             // run use case
             runBlocking {
-                handler.runMission()
+                handler.runApp()
             }
 
             // return response
