@@ -9,13 +9,11 @@ import strikt.assertions.isEqualTo
 
 class CreationPhaseTests {
 
-    data class Item(val qty: Int) {
-        companion object {
-            fun parseItem(qty: String): OptionalItem =
-                if (qty.matches(Regex("^[0-9]+$"))) OptionalItem.Valid(Item(qty.toInt()))
-                else OptionalItem.Invalid
-        }
-    }
+    data class Item(val qty: Int)
+
+    private fun parseItem(qty: String): OptionalItem =
+        if (qty.matches(Regex("^[0-9]+$"))) OptionalItem.Valid(Item(qty.toInt()))
+        else OptionalItem.Invalid
 
     sealed class OptionalItem {
         data class Valid(val item: Item) : OptionalItem()
@@ -24,7 +22,7 @@ class CreationPhaseTests {
 
     @Test
     fun `item creation`() {
-        val result = Item.parseItem("10")
+        val result = parseItem("10")
 
         expectThat(result).isEqualTo(OptionalItem.Valid(Item(10)))
     }
@@ -32,7 +30,7 @@ class CreationPhaseTests {
     @ParameterizedTest
     @ValueSource(strings = ["asd", "1 0 0", ""])
     fun `invalid item creation`(input: String) {
-        val result = Item.parseItem(input)
+        val result = parseItem(input)
 
         expectThat(result).isEqualTo(OptionalItem.Invalid)
     }

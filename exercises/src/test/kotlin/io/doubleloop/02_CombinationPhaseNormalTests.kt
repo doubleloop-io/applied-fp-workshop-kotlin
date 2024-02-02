@@ -19,18 +19,15 @@ class CombinationPhaseNormalTests {
     data class Item(val qty: Int) {
         fun checkIn(qty: Int): Item =
             copy(qty = this.qty + qty)
-
-        companion object {
-            fun parseItem(qty: String): Option<Item> =
-                if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
-                else none()
-        }
     }
 
+    private fun parseItem(qty: String): Option<Item> =
+        if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
+        else none()
 
     @Test
     fun `creation and checkIn`() {
-        val item = Item.parseItem("10")
+        val item = parseItem("10")
 
         val result = item
             .map { it.checkIn(10) }
@@ -41,7 +38,7 @@ class CombinationPhaseNormalTests {
     @ParameterizedTest
     @ValueSource(strings = ["asd", "1 0 0", ""])
     fun `invalid creation and checkIn`(input: String) {
-        val item = Item.parseItem(input)
+        val item = parseItem(input)
 
         val result = item
             .map { it.checkIn(10) }

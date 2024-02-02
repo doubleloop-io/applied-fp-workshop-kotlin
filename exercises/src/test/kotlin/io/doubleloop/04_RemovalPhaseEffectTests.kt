@@ -19,17 +19,15 @@ class RemovalPhaseTests {
         fun checkOut(qty: Int): Option<Item> =
             if (this.qty - qty < 0) none()
             else copy(qty = this.qty - qty).some()
-
-        companion object {
-            fun parseItem(qty: String): Option<Item> =
-                if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
-                else none()
-        }
     }
+
+    private fun parseItem(qty: String): Option<Item> =
+        if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
+        else none()
 
     @Test
     fun `creation and removal`() {
-        val item = Item.parseItem("100")
+        val item = parseItem("100")
 
         val result = item
             .getOrElse { Item(0) }
@@ -40,7 +38,7 @@ class RemovalPhaseTests {
     @ParameterizedTest
     @ValueSource(strings = ["asd", "1 0 0", ""])
     fun `invalid creation and removal`(input: String) {
-        val item = Item.parseItem(input)
+        val item = parseItem(input)
 
         val result = item
             .getOrElse { Item(0) }
@@ -51,7 +49,7 @@ class RemovalPhaseTests {
 
     @Test
     fun `creation, checkIn, checkOut and removal`() {
-        val item = Item.parseItem("100")
+        val item = parseItem("100")
 
         val result = item
             .map { it.checkIn(10) }
@@ -63,7 +61,7 @@ class RemovalPhaseTests {
 
     @Test
     fun `creation and removal (change result type)`() {
-        val item = Item.parseItem("100")
+        val item = parseItem("100")
 
         val result = item
             .fold({ "alternative" }, { it.qty.toString() })
@@ -74,7 +72,7 @@ class RemovalPhaseTests {
     @ParameterizedTest
     @ValueSource(strings = ["asd", "1 0 0", ""])
     fun `invalid creation and removal (change result type)`(input: String) {
-        val item = Item.parseItem(input)
+        val item = parseItem(input)
 
         val result = item
             .fold({ "alternative" }, { it.qty.toString() })

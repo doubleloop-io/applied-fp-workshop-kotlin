@@ -10,18 +10,16 @@ import strikt.assertions.isEqualTo
 
 class CombinationPhaseListTests {
 
-    data class Item(val qty: Int) {
-        companion object {
-            fun parseItem(qty: String): Option<Item> =
-                if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
-                else none()
-        }
-    }
+    data class Item(val qty: Int)
+
+    private fun parseItem(qty: String): Option<Item> =
+        if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
+        else none()
 
     @Test
     fun `all valid - list of results`() {
         val items = listOf("1", "10", "100")
-            .map { Item.parseItem(it) }
+            .map { parseItem(it) }
 
         expectThat(items).isEqualTo(
             listOf(
@@ -35,7 +33,7 @@ class CombinationPhaseListTests {
     @Test
     fun `some invalid - list of results`() {
         val items = listOf("1", "asd", "100")
-            .map { Item.parseItem(it) }
+            .map { parseItem(it) }
 
         expectThat(items).isEqualTo(
             listOf(
@@ -50,7 +48,7 @@ class CombinationPhaseListTests {
     fun `all valid - result of list`() {
         val items = option {
             listOf("1", "10", "100")
-                .map { Item.parseItem(it).bind() }
+                .map { parseItem(it).bind() }
         }
 
         expectThat(items).isEqualTo(
@@ -62,12 +60,11 @@ class CombinationPhaseListTests {
         )
     }
 
-
     @Test
     fun `some invalid - result of list`() {
         val items = option {
             listOf("1", "asd", "100")
-                .map { Item.parseItem(it).bind() }
+                .map { parseItem(it).bind() }
         }
 
         expectThat(items).isEqualTo(

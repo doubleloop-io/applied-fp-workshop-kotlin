@@ -23,17 +23,15 @@ class CombinationPhaseEffectTests {
         fun checkOut(qty: Int): Option<Item> =
             if (this.qty - qty < 0) none()
             else copy(qty = this.qty - qty).some()
-
-        companion object {
-            fun parseItem(qty: String): Option<Item> =
-                if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
-                else none()
-        }
     }
+
+    private fun parseItem(qty: String): Option<Item> =
+        if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
+        else none()
 
     @Test
     fun `creation and checkOut`() {
-        val item = Item.parseItem("100")
+        val item = parseItem("100")
 
         val result = item
             .flatMap { it.checkOut(10) }
@@ -43,7 +41,7 @@ class CombinationPhaseEffectTests {
 
     @Test
     fun `creation and invalid checkOut`() {
-        val item = Item.parseItem("10")
+        val item = parseItem("10")
 
         val result = item
             .flatMap { it.checkOut(110) }
@@ -54,7 +52,7 @@ class CombinationPhaseEffectTests {
     @ParameterizedTest
     @ValueSource(strings = ["asd", "1 0 0", ""])
     fun `invalid creation and checkOut`(input: String) {
-        val item = Item.parseItem(input)
+        val item = parseItem(input)
 
         val result = item
             .flatMap { it.checkOut(10) }
@@ -64,7 +62,7 @@ class CombinationPhaseEffectTests {
 
     @Test
     fun `creation, checkIn and checkOut`() {
-        val item = Item.parseItem("100")
+        val item = parseItem("100")
 
         val result = item
             .map { it.checkIn(10) }
