@@ -99,7 +99,7 @@ fun runMission(
 ): Either<ParseError, Rover> =
     TODO()
 
-// TODO 12: convert a rover in a string
+// TODO 12: convert the rover in a string
 // OUTPUT EXAMPLE: Rover(Position(3, 2), N) -> "3:2:S"
 fun renderComplete(rover: Rover): String =
     TODO()
