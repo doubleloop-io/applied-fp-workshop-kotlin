@@ -1,6 +1,6 @@
 package io.doubleloop.solutions.version5
 
-import io.doubleloop.solutions.utils.Console
+import io.doubleloop.utils.Console
 import io.doubleloop.solutions.version5.Command.*
 import io.doubleloop.solutions.version5.Orientation.N
 import kotlinx.coroutines.test.runTest
