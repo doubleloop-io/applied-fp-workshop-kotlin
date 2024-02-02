@@ -1,7 +1,6 @@
 package io.doubleloop.utils
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.coroutineScope
 
 object Console {
 
@@ -9,26 +8,24 @@ object Console {
     const val RED = "\u001B[31m"
     const val RESET = "\u001B[0m"
 
-    suspend fun ask(question: String): String {
+    suspend fun ask(question: String): String = coroutineScope {
         puts(question)
-        return reads()
+        reads()
     }
 
-    suspend fun logInfo(message: String) {
+    suspend fun logInfo(message: String) = coroutineScope {
         puts(green("[OK] $message"))
     }
 
-    suspend fun logError(message: String) {
+    suspend fun logError(message: String) = coroutineScope {
         puts(red("[ERROR] $message"))
     }
 
-    private suspend fun puts(message: String) = withContext(Dispatchers.IO) {
+    private fun puts(message: String) =
         println(message)
-    }
 
-    private suspend fun reads(): String = withContext(Dispatchers.IO) {
-        readLine() ?: ""
-    }
+    private fun reads(): String =
+        readlnOrNull() ?: ""
 
     private fun green(message: String): String =
         "$GREEN$message$RESET"
