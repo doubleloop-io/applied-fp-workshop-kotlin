@@ -1,10 +1,14 @@
 package io.doubleloop
 
-import arrow.core.*
-import arrow.core.raise.either
-import arrow.core.raise.option
+import arrow.core.Either
+import arrow.core.Option
+import arrow.core.right
+import arrow.core.some
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
+// TODO 1: remove the disabled annotation and make all tests green
+@Disabled
 class ChainingTests {
 
     data class ItemId(val id: Int)
@@ -15,60 +19,35 @@ class ChainingTests {
 
     @Test
     fun `chaining with Option`() {
+        // NOTE: stub implementations
+        //  just to make the compiler happy
         fun load(id: ItemId): Option<Item> =
             Item(id, 100).some()
 
         fun save(item: Item): Option<Unit> =
             Unit.some()
 
-        val program: Option<Unit> =
-            load(ItemId(1))
-                .map { it.checkIn(10) }
-                .flatMap { save(it) }
+        // TODO 1: write a program that:
+        //  load item id 123,
+        //  check in 10 and
+        //  finally save the item
+        val program: Option<Unit> = TODO()
     }
 
     @Test
     fun `chaining with Either`() {
+        // NOTE: stub implementations
+        //  just to make the compiler happy
         fun load(id: ItemId): Either<String, Item> =
             Item(id, 100).right()
 
         fun save(item: Item): Either<String, Unit> =
             Unit.right()
 
-        val program: Either<String, Unit> =
-            load(ItemId(1))
-                .map { it.checkIn(10) }
-                .flatMap { save(it) }
+        // TODO 2: write a program that:
+        //  load item id 123,
+        //  check in 10 and
+        //  finally save the item
+        val program: Either<String, Unit> = TODO()
     }
-
-    @Test
-    fun `chaining with Option (syntax)`() {
-        fun load(id: ItemId): Option<Item> =
-            Item(id, 100).some()
-
-        fun save(item: Item): Option<Unit> =
-            Unit.some()
-
-        val program: Option<Unit> = option {
-            val item = load(ItemId(1)).bind()
-            val updatedItem = item.checkIn(10)
-            save(updatedItem).bind()
-        }
-    }
-
-    @Test
-    fun `chaining with Either (syntax)`() {
-        fun load(id: ItemId): Either<String, Item> =
-            Item(id, 100).right()
-
-        fun save(item: Item): Either<String, Unit> =
-            Unit.right()
-
-        val program: Either<String, Unit> = either {
-            val item = load(ItemId(1)).bind()
-            val updatedItem = item.checkIn(10)
-            save(updatedItem).bind()
-        }
-    }
-
 }

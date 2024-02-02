@@ -11,7 +11,7 @@ class CreationPhaseTests {
 
     data class Item(val qty: Int)
 
-    private fun parseItem(qty: String): OptionalItem =
+    fun parseItem(qty: String): OptionalItem =
         if (qty.matches(Regex("^[0-9]+$"))) OptionalItem.Valid(Item(qty.toInt()))
         else OptionalItem.Invalid
 

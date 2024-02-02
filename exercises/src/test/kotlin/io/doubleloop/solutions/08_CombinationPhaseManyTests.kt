@@ -21,24 +21,24 @@ class CombinationPhaseManyTests {
             else copy(qty = this.qty - qty).some()
     }
 
-    private fun parseItem(name: String, qty: String): Option<Item> =
+    fun parseItem(name: String, qty: String): Option<Item> =
         parseName(name)
             .flatMap { n ->
                 parseQty(qty)
                     .map { q -> Item(n, q) }
             }
 
-    private fun parseItemSyntax(name: String, qty: String): Option<Item> = option {
+    fun parseItemSyntax(name: String, qty: String): Option<Item> = option {
         val n = parseName(name).bind()
         val q = parseQty(qty).bind()
         Item(n, q)
     }
 
-    private fun parseName(value: String): Option<String> =
+    fun parseName(value: String): Option<String> =
         if (value.trim().isNotEmpty()) value.some()
         else none()
 
-    private fun parseQty(qty: String): Option<Int> =
+    fun parseQty(qty: String): Option<Int> =
         if (qty.matches(Regex("^[0-9]+$"))) qty.toInt().some()
         else none()
 

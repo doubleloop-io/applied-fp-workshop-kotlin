@@ -25,7 +25,7 @@ class CombinationPhaseEffectTests {
             else copy(qty = this.qty - qty).some()
     }
 
-    private fun parseItem(qty: String): Option<Item> =
+    fun parseItem(qty: String): Option<Item> =
         if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
         else none()
 

@@ -2,11 +2,14 @@ package io.doubleloop
 
 import arrow.core.identity
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEmpty
 import strikt.assertions.isEqualTo
 
+// TODO 1: remove the disabled annotation and make all tests green
+@Disabled
 class CustomLazyTests {
 
     private var logs = ""
@@ -16,18 +19,19 @@ class CustomLazyTests {
         logs = ""
     }
 
-    private fun increment(x: Int): Int {
+    fun increment(x: Int): Int {
         logs += "increment"
         return x + 1
     }
 
-    private fun string(x: Int): Lazy<String> {
+    fun string(x: Int): Lazy<String> {
         logs += "string"
         return Lazy.of { x.toString() }
     }
 
     @Test
     fun `creation phase`() {
+        // TODO 2: implement 'of' function
         val result = Lazy.of { 10 }
 
         expectThat(logs).isEmpty()
@@ -36,6 +40,7 @@ class CustomLazyTests {
 
     @Test
     fun `combination phase - normal`() {
+        // TODO 3: implement 'map' function
         val result = Lazy.of { 10 }
             .map { increment(it) }
 
@@ -45,6 +50,7 @@ class CustomLazyTests {
 
     @Test
     fun `combination phase - effect`() {
+        // TODO 4: implement 'flatMap' function
         val result = Lazy.of { 10 }
             .flatMap { string(it) }
 
@@ -54,11 +60,13 @@ class CustomLazyTests {
 
     @Test
     fun `removal phase`() {
+        // TODO 5: implement 'run' function
         val result = Lazy.of { 10 }
 
         expectThat(result.run()).isEqualTo(10)
     }
 
+    // TODO 6: check if functor laws holds
     @Test
     fun `functor laws - identity`() {
         val result = Lazy.of { 10 }
@@ -81,6 +89,7 @@ class CustomLazyTests {
         expectThat(result).isEqualTo(expected)
     }
 
+    // TODO 7: check if monad laws holds
     @Test
     fun `monad laws - left identity`() {
         val result = Lazy.of { 10 }
@@ -117,17 +126,16 @@ class CustomLazyTests {
 
         companion object {
             fun <A> of(value: () -> A): Lazy<A> =
-                Lazy { value() }
+                TODO()
         }
 
         fun <B> map(f: (A) -> B): Lazy<B> =
-            Lazy { f(value()) }
+            TODO()
 
         fun <B> flatMap(f: (A) -> Lazy<B>): Lazy<B> =
-            Lazy { f(value()).run() }
+            TODO()
 
         fun run(): A =
-            value()
+            TODO()
     }
-
 }

@@ -4,12 +4,15 @@ import arrow.core.Option
 import arrow.core.getOrElse
 import arrow.core.none
 import arrow.core.some
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
+// TODO 1: remove the disabled annotation and make all tests green
+@Disabled
 class RemovalPhaseTests {
 
     data class Item(val qty: Int) {
@@ -21,7 +24,7 @@ class RemovalPhaseTests {
             else copy(qty = this.qty - qty).some()
     }
 
-    private fun parseItem(qty: String): Option<Item> =
+    fun parseItem(qty: String): Option<Item> =
         if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
         else none()
 
@@ -32,7 +35,8 @@ class RemovalPhaseTests {
         val result = item
             .getOrElse { Item(0) }
 
-        expectThat(result).isEqualTo(Item(100))
+        // TODO 2: change expected value
+        expectThat(result).isEqualTo(TODO())
     }
 
     @ParameterizedTest
@@ -43,9 +47,9 @@ class RemovalPhaseTests {
         val result = item
             .getOrElse { Item(0) }
 
-        expectThat(result).isEqualTo(Item(0))
+        // TODO 3: change expected value
+        expectThat(result).isEqualTo(TODO())
     }
-
 
     @Test
     fun `creation, checkIn, checkOut and removal`() {
@@ -56,7 +60,8 @@ class RemovalPhaseTests {
             .flatMap { it.checkOut(20) }
             .getOrElse { Item(0) }
 
-        expectThat(result).isEqualTo(Item(90))
+        // TODO 4: change expected value
+        expectThat(result).isEqualTo(TODO())
     }
 
     @Test
@@ -66,7 +71,8 @@ class RemovalPhaseTests {
         val result = item
             .fold({ "alternative" }, { it.qty.toString() })
 
-        expectThat(result).isEqualTo("100")
+        // TODO 5: change expected value
+        expectThat(result).isEqualTo(TODO())
     }
 
     @ParameterizedTest
@@ -77,6 +83,7 @@ class RemovalPhaseTests {
         val result = item
             .fold({ "alternative" }, { it.qty.toString() })
 
-        expectThat(result).isEqualTo("alternative")
+        // TODO 5: change expected value
+        expectThat(result).isEqualTo(TODO())
     }
 }

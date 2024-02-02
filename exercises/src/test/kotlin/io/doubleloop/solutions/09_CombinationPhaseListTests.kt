@@ -12,7 +12,7 @@ class CombinationPhaseListTests {
 
     data class Item(val qty: Int)
 
-    private fun parseItem(qty: String): Option<Item> =
+    fun parseItem(qty: String): Option<Item> =
         if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
         else none()
 

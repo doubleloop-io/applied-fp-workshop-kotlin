@@ -21,7 +21,7 @@ class CombinationPhaseNormalTests {
             copy(qty = this.qty + qty)
     }
 
-    private fun parseItem(qty: String): Option<Item> =
+    fun parseItem(qty: String): Option<Item> =
         if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
         else none()
 

@@ -7,10 +7,10 @@ import strikt.assertions.isEqualTo
 
 class CustomOptionTests {
 
-    private fun increment(x: Int): Int =
+    fun increment(x: Int): Int =
         x + 1
 
-    private fun string(x: Int): Option<String> =
+    fun string(x: Int): Option<String> =
         Option.of(x.toString())
 
     @Test

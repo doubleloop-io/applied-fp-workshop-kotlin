@@ -1,27 +1,23 @@
 package io.doubleloop
 
 import arrow.core.*
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
+// TODO 1: remove the disabled annotation and make all tests green
+@Disabled
 class CombinationPhaseNormalTests {
-    // Functor:
-    // 1. type constructor:
-    //      Option<A>
-    // 2. map function:
-    //      (A -> B) -> Option<A> -> Option<B>
-    // 3. respect laws (tests)
-    //      identity, composition
 
     data class Item(val qty: Int) {
         fun checkIn(qty: Int): Item =
             copy(qty = this.qty + qty)
     }
 
-    private fun parseItem(qty: String): Option<Item> =
+    fun parseItem(qty: String): Option<Item> =
         if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
         else none()
 
@@ -29,8 +25,9 @@ class CombinationPhaseNormalTests {
     fun `creation and checkIn`() {
         val item = parseItem("10")
 
+        // TODO 2: use 'map' to 'checkIn(10)'
+        //   and observe the result
         val result = item
-            .map { it.checkIn(10) }
 
         expectThat(result).isEqualTo(Some(Item(20)))
     }
@@ -40,8 +37,9 @@ class CombinationPhaseNormalTests {
     fun `invalid creation and checkIn`(input: String) {
         val item = parseItem(input)
 
+        // TODO 3: use 'map' to 'checkIn(10)'
+        //   and observe the result
         val result = item
-            .map { it.checkIn(10) }
 
         expectThat(result).isEqualTo(None)
     }

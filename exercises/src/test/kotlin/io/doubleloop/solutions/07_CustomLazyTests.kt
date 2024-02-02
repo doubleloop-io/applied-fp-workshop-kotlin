@@ -16,12 +16,12 @@ class CustomLazyTests {
         logs = ""
     }
 
-    private fun increment(x: Int): Int {
+    fun increment(x: Int): Int {
         logs += "increment"
         return x + 1
     }
 
-    private fun string(x: Int): Lazy<String> {
+    fun string(x: Int): Lazy<String> {
         logs += "string"
         return Lazy.of { x.toString() }
     }
