@@ -17,7 +17,7 @@ class DomainTests {
         val rover = Rover(Position(0, 0), N)
         val command = TurnRight
 
-        val result = execute(planet, rover, command)
+        val result = command.execute(planet, rover)
 
         expectThat(result).isEqualTo(Rover(Position(0, 0), E).right())
     }
@@ -28,7 +28,7 @@ class DomainTests {
         val rover = Rover(Position(0, 1), N)
         val command = MoveForward
 
-        val result = execute(planet, rover, command)
+        val result = command.execute(planet, rover)
 
         expectThat(result).isEqualTo(Rover(Position(0, 2), N).right())
     }
@@ -39,7 +39,7 @@ class DomainTests {
         val rover = Rover(Position(0, 1), N)
         val command = MoveForward
 
-        val result = execute(planet, rover, command)
+        val result = command.execute(planet, rover)
 
         expectThat(result).isEqualTo(Rover(Position(0, 1), N).left())
     }
