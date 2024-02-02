@@ -8,12 +8,12 @@ class FileMissionSource(private val planetFile: String, private val roverFile: S
         loadRover(roverFile)
 }
 
-class ConsoleCommandsChannel() : CommandsChannel {
+class ConsoleCommandsChannel : CommandsChannel {
     override suspend fun receive(): List<Command> =
         loadCommands()
 }
 
-class ConsoleMissionReport() : MissionReport {
+class ConsoleMissionReport : MissionReport {
     override suspend fun sequenceCompleted(rover: Rover) =
         writeSequenceCompleted(rover)
 

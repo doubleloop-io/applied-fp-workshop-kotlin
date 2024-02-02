@@ -14,17 +14,17 @@ class MainTest {
 
     @Test
     fun `get ping`() {
-        val request = Request(GET, "/ping")
+        val request = Request(GET, "/hello/ping")
         val response = app(request)
         expectThat(response).status.isEqualTo(OK)
         expectThat(response).bodyString.isEqualTo("pong")
     }
 
     @Test
-    fun `post echo`() {
-        val request = Request(POST, "/echo/john?msg=hello")
+    fun `post commands`() {
+        val request = Request(POST, "/rover/FF")
         val response = app(request)
         expectThat(response).status.isEqualTo(OK)
-        expectThat(response).bodyString.isEqualTo("hello john!")
+        expectThat(response).bodyString.isEqualTo("0:2:N")
     }
 }

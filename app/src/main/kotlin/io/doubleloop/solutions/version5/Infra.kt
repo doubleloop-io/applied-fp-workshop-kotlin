@@ -9,7 +9,7 @@ import io.doubleloop.solutions.utils.Console.logInfo
 import io.doubleloop.solutions.utils.File.loadPair
 import kotlin.coroutines.suspendCoroutine
 
-suspend fun createApplication(planetFile: String, roverFile: String): Unit {
+suspend fun createApplication(planetFile: String, roverFile: String) {
     val fileMissionSource = FileMissionSource(planetFile, roverFile)
     val consoleCommandsChannel = ConsoleCommandsChannel()
     val consoleMissionReport = ConsoleMissionReport()
@@ -20,7 +20,7 @@ suspend fun createApplication(
     missionSource: MissionSource,
     commandsChannel: CommandsChannel,
     missionReport: MissionReport
-): Unit {
+) {
     catch({
         runMission(missionSource, commandsChannel)
             .fold(
