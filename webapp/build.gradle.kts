@@ -20,7 +20,7 @@ dependencies {
     implementation(platform("org.http4k:http4k-bom:5.13.2.0"))
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-jetty")
-    implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
     implementation("ch.qos.logback:logback-classic:1.4.14")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
