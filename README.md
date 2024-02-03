@@ -11,13 +11,13 @@ $ ./gradlew build
 Run cli application
 
 ```sh
-$ ./gradlew app:run
+$ ./gradlew :app:run
 ```
 
 Run web application
 
 ```sh
-$ ./gradlew webapp:run
+$ ./gradlew :webapp:run
 ```
 
 ## Documentation
