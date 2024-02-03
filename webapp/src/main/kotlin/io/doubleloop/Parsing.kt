@@ -14,18 +14,6 @@ sealed class ParseError {
     data class InvalidCommand(val message: String) : ParseError()
 }
 
-fun runMission(
-    inputPlanet: Pair<String, String>,
-    inputRover: Pair<String, String>,
-    inputCommands: String
-): Either<ParseError, String> = either {
-    val planet = parsePlanet(inputPlanet).bind()
-    val rover = parseRover(inputRover).bind()
-    val commands = parseCommands(inputCommands).bind()
-    val result = executeAll(planet, rover, commands)
-    result.fold(::renderObstacle, ::renderComplete)
-}
-
 fun parseCommand(input: Char): Either<ParseError, Command> =
     when (input.lowercase()) {
         "f" -> MoveForward.right()
@@ -94,18 +82,9 @@ fun parsePair(separator: String, input: String): Either<Throwable, Pair<Int, Int
         Pair(first, second)
     }
 
-fun renderComplete(rover: Rover): String =
-    "${rover.position.x}:${rover.position.y}:${rover.orientation}"
-
-fun renderObstacle(rover: ObstacleDetected): String =
-    "O:${renderComplete(rover)}"
-
 fun renderError(error: ParseError): String =
     when (error) {
         is InvalidPlanet -> "Planet parsing: ${error.message}"
         is InvalidRover -> "Rover parsing: ${error.message}"
         is InvalidCommand -> "Command parsing: ${error.message}"
     }
-
-fun renderError(error: Throwable): String =
-    error.message ?: "Unknown error"

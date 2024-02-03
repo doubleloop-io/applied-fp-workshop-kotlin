@@ -5,10 +5,15 @@ curl http://localhost:9000/hello/ping
 echo ""
 echo ""
 
-echo "Execute mission"
-curl http://localhost:9000/rover/FF -X POST
+echo "Execute mission: FF"
+curl -H "Content-Type: application/json" -X POST -d '{"commands":"FF"}' http://localhost:9000/rover/mission
 echo ""
 echo ""
 
-echo "Execute mission (hit obstacle)"
-curl http://localhost:9000/rover/RFF -X POST
+echo "Execute mission (hit obstacle): RFF"
+curl -H "Content-Type: application/json" -X POST -d '{"commands":"RFF"}' http://localhost:9000/rover/mission
+echo ""
+echo ""
+
+echo "Execute mission (invalid command): RXFF"
+curl -H "Content-Type: application/json" -X POST -d '{"commands":"RXFF"}' http://localhost:9000/rover/mission

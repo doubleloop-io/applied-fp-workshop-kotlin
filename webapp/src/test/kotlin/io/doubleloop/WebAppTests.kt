@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
-class AppTests {
+class WebAppTests {
 
     val app = createApp(Dependencies.create(Env()))
 
@@ -26,25 +26,34 @@ class AppTests {
 
     @Test
     fun `post commands`() {
-        val request = Request(POST, "/rover/FF")
+        val request = Request(POST, "/rover/mission").body("{ \"commands\": \"FF\" }")
         val response = app(request)
         expectThat(response).status.isEqualTo(OK)
-        expectThat(response).bodyString.isEqualTo("0:2:N")
+        expectThat(response).bodyString.isEqualTo("{\"positionX\": 0, \"positionY\": 2, \"direction\": \"N\", \"hitObstacle\": false}")
     }
 
     @Test
     fun `post commands (hit obstacle)`() {
-        val request = Request(POST, "/rover/RFF")
+        val request = Request(POST, "/rover/mission").body("{ \"commands\": \"RFF\" }")
         val response = app(request)
         expectThat(response).status.isEqualTo(UNPROCESSABLE_ENTITY)
-        expectThat(response).bodyString.isEqualTo("O:1:0:E")
+        expectThat(response).bodyString.isEqualTo("{\"positionX\": 1, \"positionY\": 0, \"direction\": \"E\", \"hitObstacle\": true}")
     }
 
     @Test
     fun `post invalid commands`() {
-        val request = Request(POST, "/rover/FFX")
+        val request = Request(POST, "/rover/mission").body("{ \"commands\": \"FFX\" }")
         val response = app(request)
         expectThat(response).status.isEqualTo(BAD_REQUEST)
         expectThat(response).bodyString.isEqualTo("Command parsing: invalid command: X")
+    }
+
+    @Test
+    fun `convert request and response from and to json`() {
+        val jsonRequest = JRunAppHttpRequest.fromJson("{ \"commands\": \"FF\" }").orThrow()
+        expectThat(jsonRequest).isEqualTo(RunAppHttpRequest("FF"))
+
+        val jsonResponse = JRunAppHttpResponse.toJson(RunAppHttpResponse(1, 2, "N", false))
+        expectThat(jsonResponse).isEqualTo("{\"positionX\": 1, \"positionY\": 2, \"direction\": \"N\", \"hitObstacle\": false}")
     }
 }
