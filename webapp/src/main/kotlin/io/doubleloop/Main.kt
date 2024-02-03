@@ -8,14 +8,17 @@ import org.http4k.routing.routes
 import org.http4k.server.Jetty
 import org.http4k.server.asServer
 
-val app: HttpHandler = routes(
+fun createApp(dependencies: Dependencies): HttpHandler = routes(
     "/hello" bind WebappRoutes.helloRoutes,
-    "/rover" bind WebappRoutes.roverRoutes
+    "/rover" bind WebappRoutes.roverRoutes(dependencies.runAppHandler)
 )
 
 fun main() {
     println("[WEB] Hello World!")
 
+    val env = Env()
+    val dependencies = Dependencies.create(env)
+    val app = createApp(dependencies)
     val server = PrintRequest()
         .then(app)
         .asServer(Jetty(9000))

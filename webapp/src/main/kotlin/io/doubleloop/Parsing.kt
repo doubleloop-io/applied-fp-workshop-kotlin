@@ -106,3 +106,6 @@ fun renderError(error: ParseError): String =
         is InvalidRover -> "Rover parsing: ${error.message}"
         is InvalidCommand -> "Command parsing: ${error.message}"
     }
+
+fun renderError(error: Throwable): String =
+    error.message ?: "Unknown error"
