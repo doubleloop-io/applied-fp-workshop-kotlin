@@ -75,6 +75,8 @@ data class Rover(val position: Position, val orientation: Orientation) {
     //      return if (hitObstacle) obstacleDetected().left() else candidate.right()
     //  }
 
+    private fun obstacleDetected(): ObstacleDetected = this
+    
     private fun delta(orientation: Orientation): Delta =
         when (orientation) {
             is N -> Delta(0, 1)
