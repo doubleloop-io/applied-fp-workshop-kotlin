@@ -79,7 +79,6 @@ fun parseObstacles(input: String): Either<ParseError, List<Obstacle>> = either {
         .split(" ")
         .map { parseObstacle(it).bind() }
 }
-    .mapLeft { InvalidPlanet("invalid obstacles: $input") }
 
 fun parsePlanet(input: Pair<String, String>): Either<ParseError, Planet> = either {
     val (inputSize, inputObstacles) = input

@@ -6,9 +6,12 @@ import io.doubleloop.version2.ParseError.*
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
+import java.util.stream.Stream
 
 class ParsingTests {
 
@@ -43,12 +46,21 @@ class ParsingTests {
 
     @Disabled
     @ParameterizedTest
-    @ValueSource(strings = ["20 0,3", "2,0 03", "apple"])
-    fun `parse invalid obstacles`(input: String) {
+    @MethodSource("provideParameters")
+    fun `parse invalid obstacles`(input: String, expected: String) {
 
         val result = parseObstacles(input)
 
-        expectThat(result).isEqualTo(InvalidPlanet("invalid obstacles: $input").left())
+        expectThat(result).isEqualTo(InvalidPlanet("invalid obstacle: $expected").left())
+    }
+
+    private companion object {
+        @JvmStatic
+        fun provideParameters() = Stream.of(
+            Arguments.of("20 0,3", "20"),
+            Arguments.of("2,0 03", "03"),
+            Arguments.of("apple", "apple")
+        )
     }
 
     @Disabled
