@@ -76,7 +76,7 @@ data class Rover(val position: Position, val orientation: Orientation) {
     //  }
 
     private fun obstacleDetected(): ObstacleDetected = this
-    
+
     private fun delta(orientation: Orientation): Delta =
         when (orientation) {
             is N -> Delta(0, 1)

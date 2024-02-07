@@ -34,14 +34,14 @@ fun parsePair(separator: String, input: String): Either<Throwable, Pair<Int, Int
 
 // TODO 2: parse input in a pair, then in a position and set proper error
 // INPUT EXAMPLE: "2,0" -> Right(Position(2, 0))
-// INPUT EXAMPLE: "20" -> Left(InvalidPlanet("Invalid position"))
+// INPUT EXAMPLE: "20" -> Left(InvalidRover("Invalid position: 20"))
 // HINT: combination phase normal (Functor)
 fun parsePosition(input: String): Either<ParseError, Position> =
     TODO()
 
 // TODO 3: parse input in a orientation or returns an error
 // INPUT EXAMPLE: "N" -> Right(N)
-// INPUT EXAMPLE: "X" -> Left(InvalidPlanet("Invalid orientation"))
+// INPUT EXAMPLE: "X" -> Left(InvalidRover("Invalid orientation: X"))
 // HINT: creation phase
 fun parseOrientation(input: String): Either<ParseError, Orientation> =
     TODO()
@@ -78,14 +78,14 @@ fun parsePlanet(input: Pair<String, String>): Either<ParseError, Planet> =
 
 // TODO 9: parse input in a command or returns an error
 // INPUT EXAMPLE: "B" -> Right(MoveBackward)
-// INPUT EXAMPLE: "X" -> Left(InvalidCommand("Invalid command"))
+// INPUT EXAMPLE: "X" -> Left(InvalidCommand("Invalid command: X"))
 // HINT: creation phase
 fun parseCommand(input: Char): Either<ParseError, Command> =
     TODO()
 
 // TODO 10: parse each char in a command and combine in one result
 // INPUT EXAMPLE: "BFLR" -> Right(listOf(MoveBackward, MoveForward, TurnLeft, TurnRight))
-// INPUT EXAMPLE: "BFXLR" -> Left(InvalidCommand("Invalid command"))
+// INPUT EXAMPLE: "BFXLR" -> Left(InvalidCommand("Invalid command: X"))
 // HINT: combination phase list (Traversal)
 fun parseCommands(input: String): Either<ParseError, List<Command>> =
     TODO()
