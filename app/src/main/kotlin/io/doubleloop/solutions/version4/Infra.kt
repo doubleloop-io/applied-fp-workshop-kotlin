@@ -37,7 +37,7 @@ suspend fun loadRover(fileName: String): Rover = either {
 }.toSuspend()
 
 suspend fun loadCommands(): List<Command> = either {
-    val input = ask("Waiting commands...")
+    val input = ask()
     parseCommands(input).bind()
 }.toSuspend()
 

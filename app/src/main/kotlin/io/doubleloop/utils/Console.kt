@@ -8,8 +8,8 @@ object Console {
     const val RED = "\u001B[31m"
     const val RESET = "\u001B[0m"
 
-    suspend fun ask(question: String): String = coroutineScope {
-        puts(question)
+    suspend fun ask(): String = coroutineScope {
+        puts("Waiting commands...")
         reads()
     }
 

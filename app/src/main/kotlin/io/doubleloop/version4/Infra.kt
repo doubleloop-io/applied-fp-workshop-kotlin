@@ -63,11 +63,6 @@ suspend fun writeError(error: Throwable) {
     TODO()
 }
 
-// TODO 1: runMission, writeSequenceCompleted or writeObstacleDetected and
-//  then resolve any Error just by writeMissionFailed
-// HINT: runMission returns TaskEither but runApp only Task
-// HINT: combine phase normal and then removal phase
-
 // TODO 8: runMission, then fold in writeSequenceCompleted or writeObstacleDetected
 // HINT: combine phase normal and then removal phase
 // TODO 9: catch any unhandled error and then writeError
