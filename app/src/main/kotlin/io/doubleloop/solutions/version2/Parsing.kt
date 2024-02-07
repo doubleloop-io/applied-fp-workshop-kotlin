@@ -19,19 +19,14 @@ fun runApp(
     inputRover: Pair<String, String>,
     inputCommands: String
 ): Either<ParseError, String> =
-    runMission(inputPlanet, inputRover, inputCommands)
-        .map { renderComplete(it) }
-
-fun runMission(
-    inputPlanet: Pair<String, String>,
-    inputRover: Pair<String, String>,
-    inputCommands: String
-): Either<ParseError, Rover> = either {
-    val planet = parsePlanet(inputPlanet).bind()
-    val rover = parseRover(inputRover).bind()
-    val commands = parseCommands(inputCommands).bind()
-    executeAll(planet, rover, commands)
-}
+    either {
+        val planet = parsePlanet(inputPlanet).bind()
+        val rover = parseRover(inputRover).bind()
+        val commands = parseCommands(inputCommands).bind()
+        // val (planet, rover, commands) = parseAll(input1, ....)
+        val it = executeAll(planet, rover, commands)
+        renderComplete(it)
+    }
 
 fun parseCommand(input: Char): Either<ParseError, Command> =
     when (input.lowercase()) {

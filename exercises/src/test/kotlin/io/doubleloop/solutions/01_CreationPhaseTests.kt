@@ -35,18 +35,13 @@ class CreationPhaseTests {
         expectThat(result).isEqualTo(OptionalItem.Invalid)
     }
 
-
-    data class ItemOpt(val qty: Int) {
-        companion object {
-            fun parseItem(qty: String): Option<Item> =
-                if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
-                else none()
-        }
-    }
+    fun parseItemOpt(qty: String): Option<Item> =
+        if (qty.matches(Regex("^[0-9]+$"))) Item(qty.toInt()).some()
+        else none()
 
     @Test
     fun `item creation (arrow)`() {
-        val result = ItemOpt.parseItem("10")
+        val result = parseItemOpt("10")
 
         expectThat(result).isEqualTo(Some(Item(10)))
     }
@@ -54,7 +49,7 @@ class CreationPhaseTests {
     @ParameterizedTest
     @ValueSource(strings = ["asd", "1 0 0", ""])
     fun `invalid item creation (arrow)`(input: String) {
-        val result = ItemOpt.parseItem(input)
+        val result = parseItemOpt(input)
 
         expectThat(result).isEqualTo(None)
     }
