@@ -12,7 +12,7 @@ class CombinationPhaseEffectTests {
     // 1. type constructor:
     //      OptionF<A>
     // 2. flatMap (alias: bind, chain) function:
-    //      (A -> Option<B>) -> Option<A> -> Option<B>
+    //      Option<A>.flatMap(A -> Option<B>): Option<B>
     // 3. respect laws (tests)
     //      left identity, right identity, associativity
 

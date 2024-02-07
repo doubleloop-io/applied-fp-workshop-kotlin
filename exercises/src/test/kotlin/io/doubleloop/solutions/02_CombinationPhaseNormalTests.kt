@@ -12,7 +12,7 @@ class CombinationPhaseNormalTests {
     // 1. type constructor:
     //      Option<A>
     // 2. map function:
-    //      (A -> B) -> Option<A> -> Option<B>
+    //      Option<A>.map(A -> B): Option<B>
     // 3. respect laws (tests)
     //      identity, composition
 

@@ -62,6 +62,7 @@ data class Rover(val position: Position, val orientation: Orientation) {
 
 }
 typealias ObstacleDetected = Rover
+
 data class Delta(val x: Int, val y: Int)
 
 sealed class Command {
