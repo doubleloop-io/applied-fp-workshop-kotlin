@@ -7,7 +7,8 @@ class Dependencies(
     companion object {
         fun create(env: Env): Dependencies {
             val fileMissionSource = FileMissionSource(env.fileSource.planet, env.fileSource.rover)
-            return Dependencies(fileMissionSource, RunAppHandler(fileMissionSource))
+            val runAppHandler = RunAppHandler(fileMissionSource)
+            return Dependencies(fileMissionSource, runAppHandler)
         }
     }
 }
