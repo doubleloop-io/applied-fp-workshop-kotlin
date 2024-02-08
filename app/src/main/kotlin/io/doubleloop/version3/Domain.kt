@@ -47,21 +47,28 @@ sealed class Command {
 }
 
 data class Rover(val position: Position, val orientation: Orientation) {
+
     fun turnRight(): Rover =
-        copy(orientation = orientation.turnRight())
+        orientation.turnRight()
+            .let { copy(orientation = it) }
 
     fun turnLeft(): Rover =
-        copy(orientation = orientation.turnLeft())
+        orientation.turnLeft()
+            .let { copy(orientation = it) }
 
     // TODO 4: fix the implementation in order to propagate Either<ObstacleDetected, Rover>
     // HINT: combination phase normal (Functor)
     fun moveForward(planet: Planet): Rover =
-        copy(position = next(planet, delta(orientation)))
+        delta(orientation)
+            .let { next(planet, it) }
+            .let { copy(position = it) }
 
     // TODO 3: fix the implementation in order to propagate Either<ObstacleDetected, Rover>
     // HINT: combination phase normal (Functor)
     fun moveBackward(planet: Planet): Rover =
-        copy(position = next(planet, delta(orientation.opposite())))
+        delta(orientation.opposite())
+            .let { next(planet, it) }
+            .let { copy(position = it) }
 
     // TODO 2: Remove this old next function
     private fun next(planet: Planet, delta: Delta): Position {

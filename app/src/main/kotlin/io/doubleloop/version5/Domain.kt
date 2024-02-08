@@ -30,18 +30,23 @@ data class Position(val x: Int, val y: Int) {
 }
 
 data class Rover(val position: Position, val orientation: Orientation) {
+
     fun turnRight(): Rover =
-        copy(orientation = orientation.turnRight())
+        orientation.turnRight()
+            .let { copy(orientation = it) }
 
     fun turnLeft(): Rover =
-        copy(orientation = orientation.turnLeft())
+        orientation.turnLeft()
+            .let { copy(orientation = it) }
 
     fun moveForward(planet: Planet): Either<ObstacleDetected, Rover> =
-        next(planet, delta(orientation))
+        delta(orientation)
+            .let { next(planet, it) }
             .map { x -> copy(position = x) }
 
     fun moveBackward(planet: Planet): Either<ObstacleDetected, Rover> =
-        next(planet, delta(orientation.opposite()))
+        delta(orientation.opposite())
+            .let { next(planet, it) }
             .map { x -> copy(position = x) }
 
     private fun next(planet: Planet, delta: Delta): Either<ObstacleDetected, Position> {

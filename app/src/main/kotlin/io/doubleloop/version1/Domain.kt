@@ -29,6 +29,7 @@ sealed class Orientation {
 data class Position(val x: Int, val y: Int)
 
 data class Rover(val position: Position, val orientation: Orientation) {
+
     // TODO 3: Change rover orientation
     fun turnRight(): Rover =
         TODO()
