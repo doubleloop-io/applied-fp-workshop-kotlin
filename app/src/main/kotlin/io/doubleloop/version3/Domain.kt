@@ -78,7 +78,7 @@ data class Rover(val position: Position, val orientation: Orientation) {
     // TODO 1: Uncomment the new next function and get familiar with the code
     //  private fun next(planet: Planet, delta: Delta): Either<ObstacleDetected, Position> {
     //      val candidate = planet.wrap(position.shift(delta))
-    //      val hitObstacle = planet.obstacles.any { Position(it.x, it.y) == candidate }
+    //      val hitObstacle = planet.obstacles.any { it.isOn(candidate) }
     //      return if (hitObstacle) obstacleDetected().left() else candidate.right()
     //  }
 
@@ -127,7 +127,12 @@ sealed class Orientation {
         }
 }
 
-data class Obstacle(val x: Int, val y: Int)
+data class Obstacle(val x: Int, val y: Int) {
+
+    fun isOn(position: Position): Boolean =
+        Position(x, y) == position
+}
+
 data class Planet(val size: Size, val obstacles: List<Obstacle>) {
     fun wrap(candidate: Position): Position =
         candidate.copy(
