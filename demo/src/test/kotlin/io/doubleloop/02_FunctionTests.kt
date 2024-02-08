@@ -81,6 +81,16 @@ class FunctionTests {
         expectThat(result).isEqualTo("0.023809523809523808")
     }
 
+    @Test
+    fun `combine many functions (the let way)`() {
+
+        val result = parseString("42")
+            .let { reciprocal(it) }
+            .let { asString(it) }
+
+        expectThat(result).isEqualTo("0.023809523809523808")
+    }
+
     // ## Multiple Dispatch
 
     // Multiple dispatch (also known as multi-methods) is a feature in which
