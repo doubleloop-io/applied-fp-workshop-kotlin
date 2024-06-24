@@ -17,7 +17,7 @@ dependencies {
     implementation("io.arrow-kt:arrow-core")
     implementation("io.arrow-kt:arrow-fx-coroutines")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
-    testImplementation("io.strikt:strikt-core:0.34.1")
+    testImplementation("io.strikt:strikt-core:0.35.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
